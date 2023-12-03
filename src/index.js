@@ -44,7 +44,32 @@ function handleSearchSubmit(event) {
     searchCity(searchInput.value);
 }
 
+function showForecast() {
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thur"]; 
+    let forecastHtml = "";
+
+    days.forEach(function (day) {
+        forecastHtml = 
+         forecastHtml + 
+         `
+    <div class="weather-forecast-day">
+     <div class="weather-forecast-date">${day}</div>
+     <div class="weather-forecast-icon">⛅</div>
+     <div class="weather-forecast-temperatures">
+        <div class="weather-forecast-temp">
+            <strong>10°</strong>
+        </div>
+        <div class="weather-forecast-temp">6°</div>
+    </div>
+  </div>
+`;
+});
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+  }
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Cairo");
+showForecast();
