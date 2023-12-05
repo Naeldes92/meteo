@@ -16,6 +16,8 @@ function refreshWeather(response) {
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
     windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
     temperatureElement.innerHTML = Math.round(temperature);
+
+    getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -44,7 +46,20 @@ function handleSearchSubmit(event) {
     searchCity(searchInput.value);
 }
 
-function showForecast() {
+function getForecast(city) {
+    let apiKey = "b284bdab0tb6f48o74084a66cb9d2433";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+    axios(apiUrl).then(showForecast);
+}
+
+function showForecast(response) {
+    console.log(response.data); 
+
+
+
+
+
+
     let days = ["Sun", "Mon", "Tue", "Wed", "Thur"]; 
     let forecastHtml = "";
 
@@ -72,4 +87,5 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Cairo");
-showForecast();
+
+
